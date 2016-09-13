@@ -2,21 +2,13 @@
 // Created by Matt on 13/09/2016.
 //
 
-#ifndef NETWORKING_TUTORIALS_PACKETSERIALISER_H
-#define NETWORKING_TUTORIALS_PACKETSERIALISER_H
+#ifndef NETWORKING_TUTORIALS_PACKETSERIALISERR_H
+#define NETWORKING_TUTORIALS_PACKETSERIALISERR_H
 
-
-#include "Packet.h"
 
 class PacketSerialiser {
 public:
-    PacketSerialiser(Packet *packet);
-
     PacketSerialiser(char *data, unsigned int dataSize);
-
-    Packet *deserialise();
-
-    char *serialise();
 
     int writeBool(bool data);
 
@@ -41,4 +33,4 @@ private:
 };
 
 
-#endif //NETWORKING_TUTORIALS_PACKETSERIALISER_H
+#endif //NETWORKING_TUTORIALS_PACKETSERIALISERR_H

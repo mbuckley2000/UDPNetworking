@@ -4,23 +4,10 @@
 
 #include "PacketSerialiser.h"
 
-PacketSerialiser::PacketSerialiser(Packet *packet) {
-}
-
 PacketSerialiser::PacketSerialiser(char *data, unsigned int dataSize) {
     buffer = data;
     bufferSize = dataSize;
     byteIndex = 0;
-}
-
-Packet *PacketSerialiser::deserialise() {
-    Packet packet = Packet();
-    packet.setType((Packet::Type) readInt());
-
-}
-
-char *PacketSerialiser::serialise() {
-    return nullptr;
 }
 
 int PacketSerialiser::writeBool(bool data) {

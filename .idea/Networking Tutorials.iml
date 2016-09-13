@@ -7,17 +7,19 @@
       <sourceFolder url="file://$MODULE_DIR$/Server.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BitPacker.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/UDPSocket.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Packet.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Connection.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/UDPSocket.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Server.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Connection.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SerialiserTests.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/UDPSocket.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/UDPSocket.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PacketSerialiser.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Packet.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PacketSerialiser.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Connection.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/UDPAddress.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SerialiserTests.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Connection.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Packet.cpp" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

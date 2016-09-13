@@ -29,15 +29,18 @@ public:
 
     const Type getType();
 
-    union {
+    union Data {
         struct Handshake {
             int version;
         } handshakeData;
     };
 
+    Type type;
+    Data data;
+
 private:
     UDPAddress *sender;
-    Type type;
+
 };
 
 
