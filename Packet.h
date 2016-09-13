@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include "UDPAddress.h"
+#include "PacketSerialiser.h"
 
 class Packet {
 public:
@@ -16,16 +17,22 @@ public:
 
     Packet();
 
+    Packet(char *data, unsigned int dataSize);
+
     void setType(Type type);
+
+    int deserialise(PacketSerialiser *serialiser);
+
+    char *serialise(PacketSerialiser *serialiser);
 
     UDPAddress *getSender();
 
     const Type getType();
 
-    union data {
-        struct handshake {
-
-        };
+    union {
+        struct Handshake {
+            int version;
+        } handshakeData;
     };
 
 private:

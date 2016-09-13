@@ -9,8 +9,8 @@
 Packet *Server::getPacket() {
     while (true) {
         if (socket->receive()) {
-            BitPacker bitPacker = BitPacker(socket->getReceivedData(), socket->getReceivedDataSize());
-            return bitPacker.unpack();
+            Packet packet = Packet(socket->getReceivedData(), socket->getReceivedDataSize());
+            return &packet;
         }
     }
 }
