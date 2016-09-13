@@ -20,7 +20,7 @@ void UDPSocket::shutDownSockets() {
 #endif
 }
 
-UDPSocket::UDPSocket(UDPAddress lastSender) : lastSender(lastSender) {}
+UDPSocket::UDPSocket() {}
 
 UDPSocket::~UDPSocket() {
     UDPSocket::close();
@@ -79,8 +79,9 @@ bool UDPSocket::isOpen() const {
     return opened;
 }
 
-bool UDPSocket::send(UDPAddress &destination, const void *data, int size) {
-    int sentBytes = sendto(handle, (const char*)data, size, 0, (sockaddr*) destination.setSockaddr(), sizeof(sockaddr_in));
+bool UDPSocket::send(UDPAddress *destination, const void *data, int size) {
+    int sentBytes = sendto(handle, (const char *) data, size, 0, (sockaddr *) destination->setSockaddr(),
+                           sizeof(sockaddr_in));
     return sentBytes == size;
 }
 
@@ -116,6 +117,8 @@ int UDPSocket::receive() {
             received = 1;
         }
 
+        receivedDataSize = bytes;
+
         unsigned int from_address =
                 ntohl( sender.sin_addr.s_addr );
 
@@ -126,7 +129,8 @@ int UDPSocket::receive() {
 
         std::cout << std::endl <<a << std::endl;
 
-        lastSender = UDPAddress((unsigned char)from_address >> 24, (unsigned char)from_address >> 16, (unsigned char)from_address >> 8, (unsigned char)from_address, from_port);
+        *lastSender = UDPAddress((unsigned char) from_address >> 24, (unsigned char) from_address >> 16,
+                                 (unsigned char) from_address >> 8, (unsigned char) from_address, from_port);
     }
 
     return received;
@@ -137,5 +141,9 @@ char *UDPSocket::getReceivedData() {
 }
 
 UDPAddress *UDPSocket::getLastSender() {
-    return &lastSender;
+    return lastSender;
+}
+
+int UDPSocket::getReceivedDataSize() const {
+    return receivedDataSize;
 }

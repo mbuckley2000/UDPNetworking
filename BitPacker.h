@@ -2,16 +2,27 @@
 // Created by Matt on 11/09/2016.
 //
 
-#ifndef NETWORKING_TUTORIALS_PACKET_H
-#define NETWORKING_TUTORIALS_PACKET_H
+#ifndef NETWORKING_TUTORIALS_BITPACKER_H
+#define NETWORKING_TUTORIALS_BITPACKER_H
 
 #include <cstdint>
+#include "Packet.h"
 
 class BitPacker {
 public:
     BitPacker(int bufferSize);
 
-    void write(void* data, unsigned int size);
+    BitPacker(char *data, int dataSize);
+
+    BitPacker(Packet *packet);
+
+    bool setData(char *data, int dataSize);
+
+    char *pack(Packet *packet);
+
+    int getPackedDataSize();
+
+    Packet *unpack();
 
 private:
     uint64_t scratch;
@@ -22,4 +33,4 @@ private:
 };
 
 
-#endif //NETWORKING_TUTORIALS_PACKET_H
+#endif //NETWORKING_TUTORIALS_BITPACKER_H

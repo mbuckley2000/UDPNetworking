@@ -12,6 +12,24 @@ BitPacker::BitPacker(int bufferSize) : bufferSize(bufferSize) {
     word_index = 0;
 }
 
-void BitPacker::write(void *data, unsigned int size) {
-    if (scratch)
+BitPacker::BitPacker(char *data, int dataSize) {
+    buffer = (uint32_t *) data;
+    word_index = dataSize;
+}
+
+BitPacker::BitPacker(Packet *packet) {
+}
+
+char *BitPacker::pack(Packet *packet) {
+}
+
+Packet *BitPacker::unpack() {
+}
+
+bool BitPacker::setData(char *data, int dataSize) {
+    return 0;
+}
+
+int BitPacker::getPackedDataSize() {
+    return 0;
 }

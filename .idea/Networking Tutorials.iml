@@ -2,16 +2,20 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Connection.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/UDPAddress.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/UDPSocket.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/UDPAddress.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/UDPSession.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/UDPSession.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BitPacker.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BitPacker.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/UDPSocket.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Server.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BitPacker.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Packet.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/UDPSocket.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Server.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Packet.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/UDPSocket.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Connection.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/UDPAddress.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
