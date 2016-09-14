@@ -26,6 +26,10 @@ public:
 
     char readChar();
 
+    char *getBuffer() const;
+
+    unsigned int getBufferSize() const;
+
 private:
     char *buffer;
     unsigned int bufferSize;

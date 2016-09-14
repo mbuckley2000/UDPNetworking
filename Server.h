@@ -17,6 +17,8 @@ public:
 
     bool isRunning();
 
+    bool sendPacket(UDPAddress *addr, Packet *packet);
+
 private:
     Packet *getPacket();
 
@@ -25,7 +27,7 @@ private:
 
     bool sendHandshake(UDPAddress *addr);
 
-    bool sendPacket(UDPAddress *addr, Packet *packet);
+
 };
 
 

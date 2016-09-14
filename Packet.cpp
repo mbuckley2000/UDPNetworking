@@ -26,7 +26,6 @@ Packet::Packet(char *data, unsigned int dataSize) {
 
 int Packet::deserialise(PacketSerialiser *serialiser) {
     type = (Type) serialiser->readInt();
-    /*
     switch (type) {
         case handshake: {
             data.handshakeData.version = serialiser->readInt();
@@ -38,7 +37,6 @@ int Packet::deserialise(PacketSerialiser *serialiser) {
             return 1;
         }
     }
-     */
 }
 
 char *Packet::serialise(PacketSerialiser *serialiser) {
@@ -54,4 +52,6 @@ char *Packet::serialise(PacketSerialiser *serialiser) {
             break;
         }
     }
+
+    return serialiser->getBuffer();
 }

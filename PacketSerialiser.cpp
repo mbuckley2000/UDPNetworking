@@ -8,6 +8,8 @@ PacketSerialiser::PacketSerialiser(char *data, unsigned int dataSize) {
     buffer = data;
     bufferSize = dataSize;
     byteIndex = 0;
+
+    //std::cout << data[0] << std::endl;
 }
 
 int PacketSerialiser::writeBool(bool data) {
@@ -68,4 +70,12 @@ char PacketSerialiser::readChar() {
     char read = buffer[byteIndex];
     byteIndex += sizeof(char);
     return read;
+}
+
+char *PacketSerialiser::getBuffer() const {
+    return buffer;
+}
+
+unsigned int PacketSerialiser::getBufferSize() const {
+    return bufferSize;
 }

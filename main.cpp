@@ -1,6 +1,6 @@
 #include <iostream>
 #include "UDPSocket.h"
-#include "SerialiserTests.h"
+#include "Server.h"
 
 int main() {
     std::cout << "Opening server on port 40005" << std::endl;
@@ -8,19 +8,19 @@ int main() {
     sock.initialiseSockets();
     sock.open(40005);
 
-    UDPAddress serverAddr = UDPAddress(192, 168, 0, 5, 25565);
+    UDPAddress me = UDPAddress(127, 0, 0, 1, 40005);
 
-    SerialiserTests tests = SerialiserTests();
-    tests.runtests();
-
-    /*
     Server server = Server(&sock);
 
+    Packet p = Packet();
+    p.setType(p.handshake);
+
+
     while (server.isRunning()) {
+        //server.sendPacket(&me, &p);
         server.update();
     }
 
-     */
     sock.close();
     sock.shutDownSockets();
     return 0;

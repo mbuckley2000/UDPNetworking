@@ -4,12 +4,14 @@
 
 #include <iostream>
 #include "Server.h"
-#include "BitPacker.h"
 
 Packet *Server::getPacket() {
+    std::cout << "Waiting to receive packet" << std::endl;
     while (true) {
-        if (socket->receive()) {
+        if (socket->receive() != 0) {
+            std::cout << "Received packet. Deserialising" << std::endl;
             Packet packet = Packet(socket->getReceivedData(), socket->getReceivedDataSize());
+            std::cout << "Received packet of type: " << packet.getType() << std::endl;
             return &packet;
         }
     }
@@ -21,10 +23,11 @@ Server::Server(UDPSocket *socket) : socket(socket) {
 
 bool Server::sendPacket(UDPAddress *addr, Packet *packet) {
     //Send
-    BitPacker bitPacker = BitPacker(packet);
-    char *data = bitPacker.pack(packet);
-    int dataSize = bitPacker.getPackedDataSize();
-    socket->send(addr, data, dataSize);
+    std::cout << "Sending packet of type: " << packet->getType() << std::endl;
+    char *buffer = (char *) calloc(1, 1024);
+    PacketSerialiser serialiser = PacketSerialiser(buffer, 1024);
+    packet->serialise(&serialiser);
+    socket->send(addr, serialiser.getBuffer(), serialiser.getBufferSize());
 }
 
 bool Server::sendHandshake(UDPAddress *addr) {
