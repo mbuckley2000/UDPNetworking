@@ -30,6 +30,8 @@ public:
 
     unsigned int getBufferSize() const;
 
+    unsigned int getLength();
+
 private:
     char *buffer;
     unsigned int bufferSize;

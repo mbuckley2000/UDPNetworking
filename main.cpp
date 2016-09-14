@@ -15,9 +15,8 @@ int main() {
     Packet p = Packet();
     p.setType(p.handshake);
 
-
     while (server.isRunning()) {
-        //server.sendPacket(&me, &p);
+        //std::cout << "Update loop" << std::endl;
         server.update();
     }
 

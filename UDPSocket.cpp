@@ -100,9 +100,8 @@ int UDPSocket::receive() {
                 typedef int socklen_t;
         #endif
 
-        socklen_t fromLength = sizeof(lastSender);
-
         sockaddr_in sender;
+        socklen_t fromLength = sizeof(sender); //lastSender
 
         int bytes = recvfrom(handle,
                               recvBuffer,
@@ -125,14 +124,14 @@ int UDPSocket::receive() {
         unsigned short from_port =
                 ntohs( sender.sin_port );
 
-        int a = (unsigned char)from_address >> 16;
+        std::cout << "Size: " << bytes << std::endl;
+        std::cout << "Data: " << recvBuffer << std::endl;
+        std::cout << "From address: " << from_address << ":" << from_port << std::endl;
 
-        std::cout << std::endl <<a << std::endl;
+        UDPAddress fromUDPAddr = UDPAddress(from_address, from_port);
 
-        *lastSender = UDPAddress((unsigned char) from_address >> 24, (unsigned char) from_address >> 16,
-                                 (unsigned char) from_address >> 8, (unsigned char) from_address, from_port);
+        lastSender = &fromUDPAddr;
     }
-
     return received;
 }
 

@@ -79,3 +79,7 @@ char *PacketSerialiser::getBuffer() const {
 unsigned int PacketSerialiser::getBufferSize() const {
     return bufferSize;
 }
+
+unsigned int PacketSerialiser::getLength() {
+    return byteIndex;
+}

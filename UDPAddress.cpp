@@ -10,6 +10,13 @@ UDPAddress::UDPAddress(unsigned char a, unsigned char b, unsigned char c, unsign
                                                                                                                   d(d),
                                                                                                                   port(port) {}
 
+UDPAddress::UDPAddress(unsigned int address, unsigned short port) : port(port) {
+    d = address & 0xFF;
+    c = (address >> 8) & 0xFF;
+    b = (address >> 16) & 0xFF;
+    a = (address >> 24) & 0xFF;
+}
+
 sockaddr_in* UDPAddress::setSockaddr() {
     unsigned int address = ( a << 24 ) |
                            ( b << 16 ) |

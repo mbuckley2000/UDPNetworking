@@ -38,6 +38,8 @@ class UDPAddress
 {
 public:
     UDPAddress(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned short port );
+
+    UDPAddress(unsigned int address, unsigned short port);
     sockaddr_in* setSockaddr();
     unsigned short getPort();
     unsigned char getA();

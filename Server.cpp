@@ -6,15 +6,14 @@
 #include "Server.h"
 
 Packet *Server::getPacket() {
-    std::cout << "Waiting to receive packet" << std::endl;
-    while (true) {
-        if (socket->receive() != 0) {
-            std::cout << "Received packet. Deserialising" << std::endl;
-            Packet packet = Packet(socket->getReceivedData(), socket->getReceivedDataSize());
-            std::cout << "Received packet of type: " << packet.getType() << std::endl;
-            return &packet;
-        }
+    if (socket->receive() == 1) {
+        std::cout << "Received packet. Deserialising" << std::endl;
+        Packet packet = Packet(socket->getReceivedData(), (unsigned int) socket->getReceivedDataSize());
+        std::cout << "Received packet of type: " << packet.getType() << std::endl;
+        return &packet;
     }
+
+    return nullptr;
 }
 
 Server::Server(UDPSocket *socket) : socket(socket) {
@@ -24,10 +23,10 @@ Server::Server(UDPSocket *socket) : socket(socket) {
 bool Server::sendPacket(UDPAddress *addr, Packet *packet) {
     //Send
     std::cout << "Sending packet of type: " << packet->getType() << std::endl;
-    char *buffer = (char *) calloc(1, 1024);
-    PacketSerialiser serialiser = PacketSerialiser(buffer, 1024);
+    char *buffer = (char *) calloc(sizeof(char), 1024);
+    PacketSerialiser serialiser = PacketSerialiser(buffer, sizeof(char) * 1024);
     packet->serialise(&serialiser);
-    socket->send(addr, serialiser.getBuffer(), serialiser.getBufferSize());
+    socket->send(addr, serialiser.getBuffer(), serialiser.getLength());
 }
 
 bool Server::sendHandshake(UDPAddress *addr) {
@@ -40,19 +39,22 @@ bool Server::sendHandshake(UDPAddress *addr) {
 bool Server::update() {
     Packet *packet = getPacket();
 
-    switch (packet->getType()) {
-        case packet->handshake: {
-            //Make connection, starts in handshake mode
-            //sendHandshake(packet->getSender());
-            std::cout << "HANDSHAKE RECEIVED" << std::endl;
-            break;
-        }
+    if (packet != nullptr) {
+        switch (packet->getType()) {
+            case packet->handshake: {
+                //Make connection, starts in handshake mode
+                //sendHandshake(packet->getSender());
+                std::cout << "HANDSHAKE RECEIVED" << std::endl;
+                break;
+            }
 
-        default: {
-            std::cerr << "UNRECOGNISED PACKET TYPE" << std::endl;
-            break;
+            default: {
+                std::cerr << "UNRECOGNISED PACKET TYPE" << std::endl;
+                break;
+            }
         }
     }
+
     return false;
 }
 
