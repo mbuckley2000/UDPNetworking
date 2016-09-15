@@ -4,8 +4,9 @@
 
 #include "Connection.h"
 
-Connection::Connection(UDPSocket *socket) :
-        socket(socket) {}
+Connection::Connection(UDPAddress *remoteAddress) : remoteAddress(remoteAddress) {
+    packetQueue = std::queue<Packet *>();
+}
 
 int Connection::connect() {
     unsigned short timeout = 10; //Seconds before aborting
@@ -14,20 +15,14 @@ int Connection::connect() {
     }
 }
 
-int Connection::accept() {
-    if (socket->isOpen()) {
-        if (socket->receive()) {
-
-        }
-    }
-}
-
-char *Connection::encode(char *message) {
-    char* output = strcat(message, message);
-    free(message);
-    return output;
-}
-
 bool Connection::isConnected() {
     return connected;
+}
+
+void Connection::addPacket(Packet *packet) {
+    packetQueue.push(packet);
+}
+
+void Connection::update() {
+    //Process packet queue
 }

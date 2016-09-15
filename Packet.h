@@ -40,7 +40,6 @@ public:
 
 private:
     UDPAddress *sender;
-
 };
 
 

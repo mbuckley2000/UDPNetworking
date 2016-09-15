@@ -5,6 +5,8 @@
 #include <iostream>
 #include "Packet.h"
 
+#define PROTOCOLID 1879253549
+
 Packet::Packet() {}
 
 void Packet::setType(Type packetType) {
@@ -25,21 +27,28 @@ Packet::Packet(char *data, unsigned int dataSize) {
 }
 
 int Packet::deserialise(PacketSerialiser *serialiser) {
-    type = (Type) serialiser->readInt();
-    switch (type) {
-        case handshake: {
-            data.handshakeData.version = serialiser->readInt();
-            return 0;
-        }
+    int protID = serialiser->readInt();
+    if (protID == PROTOCOLID) {
+        type = (Type) serialiser->readInt();
+        switch (type) {
+            case handshake: {
+                data.handshakeData.version = serialiser->readInt();
+                return 0;
+            }
 
-        default: {
-            std::cerr << "Unrecognised packet type" << std::endl;
-            return 1;
+            default: {
+                std::cerr << "Unrecognised packet type" << std::endl;
+                return 1;
+            }
         }
+    } else {
+        std::cerr << "Received packet from different protocol" << std::endl;
+        return 1;
     }
 }
 
 char *Packet::serialise(PacketSerialiser *serialiser) {
+    serialiser->writeInt(PROTOCOLID);
     serialiser->writeInt((int) type);
     switch (type) {
         case handshake: {

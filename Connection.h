@@ -4,23 +4,26 @@
 
 #ifndef NETWORKING_TUTORIALS_CONNECTION_H
 #define NETWORKING_TUTORIALS_CONNECTION_H
+
+#include <queue>
 #include "UDPSocket.h"
+#include "Packet.h"
 
 class Connection {
 public:
-    Connection(UDPSocket *socket);
+    Connection(UDPAddress *remoteAddress);
     int connect();
-    char* encode(char* message);
     bool isConnected();
 
-    int accept();
+    void addPacket(Packet *packet);
+
+    void update();
 
 private:
-    int protocolID = 24653;
     unsigned short sessionID;
     bool connected;
-    UDPSocket* socket;
     UDPAddress* remoteAddress;
+    std::queue<Packet *> packetQueue;
 };
 
 
