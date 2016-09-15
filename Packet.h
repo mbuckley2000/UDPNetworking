@@ -27,6 +27,8 @@ public:
 
     UDPAddress *getSender();
 
+    void setSender(UDPAddress *sender);
+
     const Type getType();
 
     union Data {

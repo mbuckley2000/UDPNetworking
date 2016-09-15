@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Packet.h"
 
-#define PROTOCOLID 1879253549
+#define PROTOCOLID 987654365
 
 Packet::Packet() {}
 
@@ -28,7 +28,7 @@ Packet::Packet(char *data, unsigned int dataSize) {
 
 int Packet::deserialise(PacketSerialiser *serialiser) {
     int protID = serialiser->readInt();
-    if (protID == PROTOCOLID) {
+    if (protID == protID) { //protID == PROTOCOLID
         type = (Type) serialiser->readInt();
         switch (type) {
             case handshake: {
@@ -63,4 +63,8 @@ char *Packet::serialise(PacketSerialiser *serialiser) {
     }
 
     return serialiser->getBuffer();
+}
+
+void Packet::setSender(UDPAddress *sender) {
+    sender = sender;
 }

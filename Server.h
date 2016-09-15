@@ -11,6 +11,7 @@
 #include "UDPSocket.h"
 #include "Packet.h"
 #include "Connection.h"
+#include "ConnectionHandler.h"
 
 class Server {
 public:
@@ -19,21 +20,12 @@ public:
     bool update();
 
     bool isRunning();
-
-    bool sendPacket(UDPAddress *addr, Packet *packet);
-
 private:
-    Packet *processIncomingPackets();
-
-    void processPacketQueue();
+    void processIncomingPackets();
 
     bool running;
     UDPSocket *socket;
-
-    bool sendHandshake(UDPAddress *addr);
-
-    std::map<UDPAddress *, Connection> connectionMap;
-    std::queue<Packet *> packetQueue;
+    ConnectionHandler *connectionHandler;
 };
 
 

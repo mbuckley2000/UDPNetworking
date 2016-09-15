@@ -128,6 +128,7 @@ int UDPSocket::receive() {
         std::cout << "Data: " << recvBuffer << std::endl;
         std::cout << "From address: " << from_address << ":" << from_port << std::endl;
 
+        std::cout << "Converting to human form" << std::endl;
         UDPAddress fromUDPAddr = UDPAddress(from_address, from_port);
 
         lastSender = &fromUDPAddr;

@@ -2,6 +2,7 @@
 // Created by Matt on 10/09/2016.
 //
 
+#include <iostream>
 #include "UDPAddress.h"
 
 UDPAddress::UDPAddress(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned short port) : a(a),
@@ -15,6 +16,7 @@ UDPAddress::UDPAddress(unsigned int address, unsigned short port) : port(port) {
     c = (address >> 8) & 0xFF;
     b = (address >> 16) & 0xFF;
     a = (address >> 24) & 0xFF;
+    std::cout << a << "." << b << "." << c << "." << d << ":" << port << std::endl;
 }
 
 sockaddr_in* UDPAddress::setSockaddr() {

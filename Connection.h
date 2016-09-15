@@ -11,19 +11,24 @@
 
 class Connection {
 public:
-    Connection(UDPAddress *remoteAddress);
+    Connection(UDPAddress *remoteAddress, UDPSocket *socket);
     int connect();
     bool isConnected();
 
     void addPacket(Packet *packet);
 
-    void update();
+    void sendPacket(Packet *packet);
+
+    bool hasPacket();
+
+    Packet *getPacket();
 
 private:
     unsigned short sessionID;
     bool connected;
     UDPAddress* remoteAddress;
     std::queue<Packet *> packetQueue;
+    UDPSocket *socket;
 };
 
 

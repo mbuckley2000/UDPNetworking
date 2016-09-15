@@ -46,7 +46,7 @@ public:
     unsigned char getB();
     unsigned char getC();
     unsigned char getD();
-
+    
 private:
     unsigned char a;
     unsigned char b;
