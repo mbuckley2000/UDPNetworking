@@ -25,9 +25,9 @@ public:
 
     char *serialise(PacketSerialiser *serialiser);
 
-    UDPAddress *getSender();
+    UDPAddress getSender();
 
-    void setSender(UDPAddress *sender);
+    void setSender(UDPAddress sender);
 
     const Type getType();
 
@@ -41,7 +41,7 @@ public:
     Data data;
 
 private:
-    UDPAddress *sender;
+    UDPAddress sender = UDPAddress(0, 0);
 };
 
 

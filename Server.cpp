@@ -7,17 +7,17 @@
 
 void Server::processIncomingPackets() {
     if (socket->receive() != 0) {
-        //std::cout << "Received packet. Deserialising" << std::endl;
+        std::cout << "Received packet. Deserialising" << std::endl;
         Packet packet = Packet();
         PacketSerialiser serialiser = PacketSerialiser(socket->getReceivedData(),
                                                        (unsigned int) socket->getReceivedDataSize());
         packet.setSender(socket->getLastSender());
         if (packet.deserialise(&serialiser) == 0) {
             std::cout << "Received packet of type: " << packet.getType() << " From Sender: "
-                      << packet.getSender()->getA() << "." << packet.getSender()->getB() << "."
-                      << packet.getSender()->getC() << "." << packet.getSender()->getD() << ":"
-                      << packet.getSender()->getPort() << std::endl;
-            //connectionHandler->processPacket(&packet);
+                      << packet.getSender().getA() << "." << packet.getSender().getB() << "."
+                      << packet.getSender().getC() << "." << packet.getSender().getD() << ":"
+                      << packet.getSender().getPort() << std::endl;
+            connectionHandler->processPacket(&packet);
         } else {
             std::cerr << "Failed to deserialise packet" << std::endl;
         }

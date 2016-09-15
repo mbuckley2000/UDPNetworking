@@ -6,22 +6,36 @@
 #include "ConnectionHandler.h"
 
 ConnectionHandler::ConnectionHandler(UDPSocket *socket) : socket(socket) {
-    connectionMap = std::map<UDPAddress *, Connection>();
+    connections = std::list<Connection>();
 }
 
 int ConnectionHandler::processPacket(Packet *packet) {
     std::cout << "Processing packet in the connection handler" << std::endl;
-
     //Determine owner, add it to their queue
-    UDPAddress *sender = packet->getSender();
-    if (connectionMap.find(sender) != connectionMap.end()) {
-        //ConnectionMap contains sender
-        std::cout << "Sender already connected, forwarding packet to their connection's packet queue: " << std::endl;
-        connectionMap.at(sender).addPacket(packet);
-    } else {
+
+    UDPAddress sender = packet->getSender();
+
+    bool hit = false;
+
+    for (std::list<Connection>::iterator ci = connections.begin(); ci != connections.end(); ci++) {
+        std::cout << ci->getAddress().getIntegerIP() << ", " << sender.getIntegerIP() << std::endl;
+        if (ci->getAddress().getIntegerIP() == sender.getIntegerIP() &&
+            ci->getAddress().getPort() == sender.getPort()) {
+            //We have a match. Connection set contains the packet sender
+            std::cout << "Sender already connected, forwarding packet to their connection's packet queue: "
+                      << std::endl;
+            ci->addPacket(packet);
+            hit = true;
+            break;
+        }
+    }
+
+    if (!hit) {
+        //Connection doesn't exist in set
         //Create connection and forward it to them
         std::cout << "New sender. Creating connection" << std::endl;
-        connectionMap.insert(std::make_pair(sender, Connection(sender, socket)));
-        connectionMap.at(sender).addPacket(packet);
+        Connection newConnection = Connection(sender, socket);
+        newConnection.addPacket(packet);
+        connections.push_back(newConnection);
     }
 }

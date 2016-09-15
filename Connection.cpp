@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Connection.h"
 
-Connection::Connection(UDPAddress *remoteAddress, UDPSocket *socket) : remoteAddress(remoteAddress), socket(socket) {
+Connection::Connection(UDPAddress remoteAddress, UDPSocket *socket) : remoteAddress(remoteAddress), socket(socket) {
     packetQueue = std::queue<Packet *>();
 }
 
@@ -40,4 +40,8 @@ Packet *Connection::getPacket() {
     Packet *p = packetQueue.front();
     packetQueue.pop();
     return p;
+}
+
+UDPAddress Connection::getAddress() {
+    return remoteAddress;
 }

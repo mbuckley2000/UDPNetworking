@@ -19,7 +19,7 @@ UDPAddress::UDPAddress(unsigned int address, unsigned short port) : port(port) {
     std::cout << a << "." << b << "." << c << "." << d << ":" << port << std::endl;
 }
 
-sockaddr_in* UDPAddress::setSockaddr() {
+sockaddr_in *UDPAddress::getIntegerIP() {
     unsigned int address = ( a << 24 ) |
                            ( b << 16 ) |
                            ( c << 8  ) |
@@ -35,18 +35,18 @@ unsigned short UDPAddress::getPort() {
     return port;
 }
 
-unsigned char UDPAddress::getA() {
+unsigned int UDPAddress::getA() {
     return a;
 }
 
-unsigned char UDPAddress::getB() {
+unsigned int UDPAddress::getB() {
     return b;
 }
 
-unsigned char UDPAddress::getC() {
+unsigned int UDPAddress::getC() {
     return c;
 }
 
-unsigned char UDPAddress::getD() {
+unsigned int UDPAddress::getD() {
     return d;
 }

@@ -6,8 +6,7 @@
 #define NETWORKING_TUTORIALS_CONNECTIONHANDLER_H
 
 
-#include <queue>
-#include <map>
+#include <list>
 #include "Packet.h"
 #include "Connection.h"
 
@@ -18,7 +17,7 @@ public:
     int processPacket(Packet *packet);
 
 private:
-    std::map<UDPAddress *, Connection> connectionMap;
+    std::list<Connection> connections;
     UDPSocket *socket;
 };
 

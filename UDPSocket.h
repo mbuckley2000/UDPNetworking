@@ -17,7 +17,7 @@ public:
     void close();
     bool isOpen() const;
 
-    bool send(UDPAddress *destination,
+    bool send(UDPAddress destination,
               const void *data,
               int size);
     int receive();
@@ -26,7 +26,8 @@ public:
 
     int getReceivedDataSize() const;
     void shutDownSockets();
-    UDPAddress* getLastSender();
+
+    UDPAddress getLastSender();
 
 
 private:
@@ -34,7 +35,7 @@ private:
     bool opened;
     char* recvBuffer;
     int receivedDataSize;
-    UDPAddress *lastSender;
+    UDPAddress lastSender = UDPAddress(0, 0);
 };
 
 #endif //NETWORKING_TUTORIALS_UDPSOCKET_H

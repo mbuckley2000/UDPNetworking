@@ -40,18 +40,23 @@ public:
     UDPAddress(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned short port );
 
     UDPAddress(unsigned int address, unsigned short port);
-    sockaddr_in* setSockaddr();
+
+    sockaddr_in *getIntegerIP();
     unsigned short getPort();
-    unsigned char getA();
-    unsigned char getB();
-    unsigned char getC();
-    unsigned char getD();
+
+    unsigned int getA();
+
+    unsigned int getB();
+
+    unsigned int getC();
+
+    unsigned int getD();
     
 private:
-    unsigned char a;
-    unsigned char b;
-    unsigned char c;
-    unsigned char d;
+    unsigned int a;
+    unsigned int b;
+    unsigned int c;
+    unsigned int d;
     unsigned short port;
     sockaddr_in addr;
 };

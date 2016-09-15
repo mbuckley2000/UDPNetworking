@@ -17,7 +17,7 @@ const Packet::Type Packet::getType() {
     return type;
 }
 
-UDPAddress *Packet::getSender() {
+UDPAddress Packet::getSender() {
     return sender;
 }
 
@@ -65,6 +65,6 @@ char *Packet::serialise(PacketSerialiser *serialiser) {
     return serialiser->getBuffer();
 }
 
-void Packet::setSender(UDPAddress *sender) {
-    sender = sender;
+void Packet::setSender(UDPAddress senderAddress) {
+    sender = senderAddress;
 }

@@ -79,8 +79,8 @@ bool UDPSocket::isOpen() const {
     return opened;
 }
 
-bool UDPSocket::send(UDPAddress *destination, const void *data, int size) {
-    int sentBytes = sendto(handle, (const char *) data, size, 0, (sockaddr *) destination->setSockaddr(),
+bool UDPSocket::send(UDPAddress destination, const void *data, int size) {
+    int sentBytes = sendto(handle, (const char *) data, size, 0, (sockaddr *) destination.getIntegerIP(),
                            sizeof(sockaddr_in));
     return sentBytes == size;
 }
@@ -118,20 +118,16 @@ int UDPSocket::receive() {
 
         receivedDataSize = bytes;
 
-        unsigned int from_address =
-                ntohl( sender.sin_addr.s_addr );
+        unsigned int from_address = ntohl(sender.sin_addr.s_addr);
 
-        unsigned short from_port =
-                ntohs( sender.sin_port );
+        unsigned short from_port = ntohs(sender.sin_port);
 
         std::cout << "Size: " << bytes << std::endl;
         std::cout << "Data: " << recvBuffer << std::endl;
         std::cout << "From address: " << from_address << ":" << from_port << std::endl;
 
         std::cout << "Converting to human form" << std::endl;
-        UDPAddress fromUDPAddr = UDPAddress(from_address, from_port);
-
-        lastSender = &fromUDPAddr;
+        lastSender = UDPAddress(from_address, from_port);
     }
     return received;
 }
@@ -140,7 +136,7 @@ char *UDPSocket::getReceivedData() {
     return recvBuffer;
 }
 
-UDPAddress *UDPSocket::getLastSender() {
+UDPAddress UDPSocket::getLastSender() {
     return lastSender;
 }
 
